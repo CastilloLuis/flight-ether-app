@@ -26,3 +26,40 @@ export const BoldText = styled.span`
   span {font-weight: 300;}
 `;
 
+export const AvailableFlights = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+export const FlightContent = styled.div`
+  width: 100%;
+  border: 1px solid #023e8a;
+  border-radius: 10px;
+  margin: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+
+export const BuyButton = styled.button`
+  border: 1px solid #023e8a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 25px;
+  border-radius: 10px;
+  color: #000;
+  background: #fff;
+  transition: all 0.1s ease-in-out;
+  margin: 5px 0;
+  &:hover {
+    background: #023e8a;
+    color: #fff;
+    cursor: pointer;
+  }
+`;

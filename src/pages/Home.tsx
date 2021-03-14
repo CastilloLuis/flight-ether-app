@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { transformWeiToEther } from '../utils/web3';
 
-import { Box } from '../components/Box/Box';
-import { BoldText, Header, HomeContainer } from './Home.styles';
-import { getFlights } from '../services/contractActions';
 import { Flight } from '../shared/entities';
+import { Box } from '../components/Box/Box';
+import { AvailableFlights, BoldText, BuyButton, FlightContent, Header, HomeContainer } from './Home.styles';
+import { getFlights, buyFlight } from '../services/contractActions';
 
 interface HomeProps {
   currentAccount: string;
@@ -37,6 +37,10 @@ export const Home: React.FC<HomeProps> = ({
     setAvailableFlights(flights);
   }
 
+  const onBuyFlight = async (flight: Flight, idx: number) : Promise<void> => {
+    await buyFlight(idx, currentAccount, flight.price);
+  }
+
   return (
     <HomeContainer>
       <Header><span>Flight Ether App</span></Header>
@@ -45,13 +49,16 @@ export const Home: React.FC<HomeProps> = ({
         <div><BoldText>ETH: <span>{transformWeiToEther(currentBalance)}</span></BoldText></div>
       </Box>
       <Box title="🛩  Flights 🛩">
+        <AvailableFlights>
           {
             availableFlights?.map((flight, idx) => (
-              <div key={'flight' + idx}>
-                <BoldText>🛫 Route: <span>{flight?.route}</span> - 💲 Price (ETH): <span>{transformWeiToEther(flight?.price?.toString())}</span></BoldText>
-              </div>
+              <FlightContent key={'flight' + idx}>
+                <BoldText>🛫 Route: <span>{flight?.route}</span> <br></br> 💲 Price (ETH): <span>{transformWeiToEther(flight?.price?.toString())}</span></BoldText>
+                <BuyButton type="button" onClick={() => onBuyFlight(flight, idx)}>Purchase</BuyButton>
+              </FlightContent>
             ))
           }
+        </AvailableFlights>
       </Box>
     </HomeContainer>
   );

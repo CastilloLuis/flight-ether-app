@@ -14,3 +14,7 @@ export async function getTotalFlights(): Promise<number> {
   const flightsLength = await window.contracts.airline.getTotalFlights();
   return flightsLength.toNumber();
 }
+
+export async function buyFlight(flightIdx: number, from: string, value: any): Promise<void> {
+  await window.contracts.airline.buyFlight(flightIdx, { from, value });
+}
