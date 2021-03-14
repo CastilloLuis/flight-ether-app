@@ -47,8 +47,8 @@ export const Home: React.FC<HomeProps> = ({
       <Box title="🛩  Flights 🛩">
           {
             availableFlights?.map((flight, idx) => (
-              <div>
-                <BoldText key={'flight' + idx}>🛫 Route: <span>{flight?.route}</span> - 💲 Price (ETH): <span>{transformWeiToEther(flight?.price?.toString())}</span></BoldText>
+              <div key={'flight' + idx}>
+                <BoldText>🛫 Route: <span>{flight?.route}</span> - 💲 Price (ETH): <span>{transformWeiToEther(flight?.price?.toString())}</span></BoldText>
               </div>
             ))
           }
