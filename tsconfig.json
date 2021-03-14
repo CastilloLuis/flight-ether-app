@@ -10,5 +10,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
+    "resolveJsonModule": true,
   },
 }

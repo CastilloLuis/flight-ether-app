@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 import { getWeb3 } from './utils/web3';
+import AirlineContract from './contracts/airline';
+
 import { Home } from './pages/Home';
 
 interface AppProps {}
 
 export const App: React.FC<AppProps> = () => {
   const [currentAccount, setCurrentAccount] = useState<string | null>(null);
+  const [airlineContract, setAirlineContract] = useState<{[key: string]: any}>(null);
 
   useEffect(() => {
     initWeb3();
@@ -14,9 +17,10 @@ export const App: React.FC<AppProps> = () => {
 
   const initWeb3 = async (): Promise<any> => {
     // https://stackoverflow.com/a/60282174 enable metamask
-    const web3 = await getWeb3();
-    const account = (await web3.eth.getAccounts())[0];
-    console.log(account)
+    window.web3 = await getWeb3();
+    const account = (await window.web3.eth.getAccounts())[0];
+    const airlineContract = await AirlineContract(window.web3.currentProvider);
+    setAirlineContract(airlineContract);
     setCurrentAccount(account);
   }
 
@@ -26,7 +30,10 @@ export const App: React.FC<AppProps> = () => {
 
   return (
     <>
-      <Home />
+      <Home
+        currentAccount={currentAccount}
+        airlineContract={airlineContract}
+      />
     </>
   );
 

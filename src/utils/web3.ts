@@ -13,3 +13,7 @@ export function getWeb3(): Promise<any> {
     });
   })
 }
+
+export function transformWeiToEther(weiValue: string): string {
+  return window.web3.utils.fromWei(weiValue, 'ether');
+}
