@@ -1,18 +1,16 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    app: ['./src/index.tsx'],
-    vendor: ['react', 'react-dom'],
-  },
+  entry: ['./node_modules/babel-polyfill', './src/index.tsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].bundle.js'
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.ts','.tsx','.js', '.jsx', '.json']
+    extensions: ['.ts','.tsx','.js', '.jsx', '.json'],
   },
   devServer: {
     port: 3000,
@@ -22,7 +20,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        exclude: '/node_modules',
+        exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'babel-loader'
       }
     ]
@@ -30,6 +28,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    })
+    }),
+    new webpack.IgnorePlugin(/^(?:electron|ws)$/)
   ]
 }
