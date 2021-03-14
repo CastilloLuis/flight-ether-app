@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
 declare global {
   interface Window {
     web3: any;
+    contracts: any;
   }
 }
 

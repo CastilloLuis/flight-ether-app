@@ -15,6 +15,11 @@ export const App: React.FC<AppProps> = () => {
     initWeb3();
   }, []);
 
+  useEffect(() => {
+    if (!airlineContract) return;
+    window.contracts = {...window.contracts, airline: airlineContract};
+  }, [airlineContract]);
+
   const initWeb3 = async (): Promise<any> => {
     // https://stackoverflow.com/a/60282174 enable metamask
     window.web3 = await getWeb3();
@@ -32,7 +37,6 @@ export const App: React.FC<AppProps> = () => {
     <>
       <Home
         currentAccount={currentAccount}
-        airlineContract={airlineContract}
       />
     </>
   );
