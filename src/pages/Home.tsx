@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { transformWeiToEther } from '../utils/web3';
 
 import { Box } from '../components/Box/Box';
-import { Header, HomeContainer } from './Home.styles';
+import { BoldText, Header, HomeContainer } from './Home.styles';
 
 interface HomeProps {
   currentAccount: string;
@@ -29,9 +29,9 @@ export const Home: React.FC<HomeProps> = ({
   return (
     <HomeContainer>
       <Header><span>Flight Ether App</span></Header>
-      <Box title="Balance 📊">
-        <div>Account: {currentAccount}</div>
-        <div>ETH: {transformWeiToEther(currentBalance)}</div>
+      <Box title="📊 Balance 📊">
+        <div><BoldText>Account: <span>{currentAccount}</span></BoldText></div>
+        <div><BoldText>ETH: <span>{transformWeiToEther(currentBalance)}</span></BoldText></div>
       </Box>
     </HomeContainer>
   );

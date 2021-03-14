@@ -20,3 +20,9 @@ export const Header = styled.div`
     color: white;
   }
 `;
+
+export const BoldText = styled.span`
+  font-weight: 500;
+  span {font-weight: 300;}
+`;
+
