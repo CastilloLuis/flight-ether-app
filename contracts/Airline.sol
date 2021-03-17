@@ -23,7 +23,7 @@ contract Airline {
   mapping(address => Flight[]) public customersFlight;
   mapping(address => uint) public customersTotalFlight;
 
-  event FlightPurchased(address indexed customer, uint price);
+  event FlightPurchased(address indexed customer, uint price, string flight);
 
   constructor() {
     owner = msg.sender;
@@ -52,7 +52,7 @@ contract Airline {
     customer.totalBoughtFlights += 1;
     customersFlight[msg.sender].push(_flight);
     customersTotalFlight[sender]++;
-    emit FlightPurchased(sender, _flight.price);
+    emit FlightPurchased(sender, _flight.price, _flight.route);
   }
 
   function redeemLoyaltyPoints() public {

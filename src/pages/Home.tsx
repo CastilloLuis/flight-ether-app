@@ -35,9 +35,7 @@ export const Home: React.FC<HomeProps> = ({
 
   useEffect(() => {
     if (!currentAccount) return;
-    getBalance();
-    getAccountFlights();
-    getRefundableAccountEther();
+    refreshCustomerData();
   }, [currentAccount]);
 
   const getBalance = async (): Promise<any>  => {
@@ -60,8 +58,15 @@ export const Home: React.FC<HomeProps> = ({
     setCurrentRefundableEther(transformWeiToEther(ether.toString()));
   }
 
+  const refreshCustomerData = () : void => {
+    getAccountFlights();
+    getRefundableAccountEther();
+    getBalance();
+  }
+
   const onBuyFlight = async (flight: Flight, idx: number) : Promise<void> => {
     await buyFlight(idx, currentAccount, flight.price);
+    refreshCustomerData();
   }
 
   const onRefundEther = async (): Promise<void> => {
