@@ -13,6 +13,7 @@ export const App: React.FC<AppProps> = () => {
 
   useEffect(() => {
     initWeb3();
+    detectMetaMaskAccountChange();
   }, []);
 
   useEffect(() => {
@@ -27,6 +28,14 @@ export const App: React.FC<AppProps> = () => {
     const airlineContract = await AirlineContract(window.web3.currentProvider);
     setAirlineContract(airlineContract);
     setCurrentAccount(account);
+  }
+
+  const detectMetaMaskAccountChange = (): void => {
+    window.ethereum.on('accountsChanged', async (event) => {
+      const address = event[0];
+      if (!address) return 'Connect with Meta Mask';
+      setCurrentAccount(address);
+    });
   }
 
   if (!currentAccount) {

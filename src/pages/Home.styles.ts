@@ -30,6 +30,8 @@ export const AvailableFlights = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+
+  ${props => props.col && 'flex-direction: column;'}
 `;
 
 export const FlightContent = styled.div`
@@ -50,16 +52,25 @@ export const BuyButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: fit-content;
   height: 25px;
   border-radius: 10px;
   color: #000;
   background: #fff;
-  transition: all 0.1s ease-in-out;
   margin: 5px 0;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
   &:hover {
     background: #023e8a;
     color: #fff;
-    cursor: pointer;
   }
 `;
+
+export const RefundButton = styled(BuyButton)`
+  background: #023e8a;
+  color: #fff;
+  &:hover {
+    color: #000;
+    background: #fff;
+  }
+`
